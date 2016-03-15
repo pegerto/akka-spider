@@ -2,10 +2,10 @@
 
 ### Abstract
 
-This project implements a standard spider using reactive programming, modeling the default actors
+This project implements a standard spider using reactive programming, modelling the default actors
 
 - Queue: Models a queue of work that need to be scheduler
-- Downloader: multiple downloader actors to do the heavy lifting, download extract and normalize the relations
+- Downloader: multiple downloader actors to do the heavy lifting, download extract and normalise the relations
 - Scheduler: Take work from the queue and send it to the downloaders.
 
 ```
@@ -44,10 +44,13 @@ Python is use for a simple reason, programming speed.
 In addition good set of know libraries are used at this project, to speed up the implementation I use libraries that I know, but
 those can be easy replace by native modules.
 
+Pykka is use as an akka library in Python, but pyka do not support all the akka features, but it helps to develop easy actors and messages as a PoC.
+
 ### Setup
 
 
 1. Configure python virtual env
+
 ```
 git clone https://github.com/pegerto/akka-spider.git
 virtualenv .
@@ -66,6 +69,7 @@ pip install requests
 pip install pykka
 pip install bs4
 ```
+
 
 ### Execute
 
@@ -107,7 +111,7 @@ digraph {
 
 ```
 
-Visualize the oput by converting the dot into a png
+Visualize the output by converting the dot into a png
 
 ```
 dot -Tpng output.dot > output.png
