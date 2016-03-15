@@ -37,7 +37,7 @@ At this implementation we cover:
 ```spider.py``` implement a PoC for those actors.
 
 
-#### Implementation
+### Implementation
 
 Python is use for a simple reason, programming speed.
 
@@ -46,11 +46,69 @@ those can be easy replace by native modules.
 
 ### Setup
 
+
+1. Configure python virtual env
 ```
+git clone https://github.com/pegerto/akka-spider.git
+virtualenv .
+source bin/activate
+
+```
+
+2. Python 2.7 required, not tested with other versions
+
+3. Install dependencies
 
 ```
 pip install mock
 pip install graphviz
+pip install requests
+pip install pykka
+pip install bs4
+```
+
+### Execute
+
+The application provides a small cli
 
 
-dot -Tpng input.dot > output.png
+```
+usage: spider.py [-h] [-R] [--ndownloaders NDOWNLOADERS] [-w WRITE] url
+
+Akka Spider
+
+positional arguments:
+  url                   URL seed, main url
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -R, --recursive-out-domain
+                        Continue recursion out of the domain
+  --ndownloaders NDOWNLOADERS
+                        Number of downloaders
+  -w WRITE, --write WRITE
+                        Output file
+```
+
+
+### Example
+
+* There is only one parameter that is seed url.
+* The downloader and scheduler is a long running thread a terminal interruption is required to end.
+* The output is write under ```output.dot``` if you ```-w``` is not present
+
+```
+python akka-spider/spider.py http://bbc.co.uk
+cat output.dot
+// Result
+digraph {
+	"http//bbc_co_uk"
+[...]
+
+```
+
+Visualize the oput by converting the dot into a png
+
+```
+dot -Tpng output.dot > output.png
+```
